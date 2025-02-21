@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.letter-spacing{
+  letter-spacing: 10px;
+}
+
+.check{
+  width:30px;
+  height:30px;
+  border-radius: 50%;
+  background-color: #f5f5f5;
+  appearance: none;
+  cursor: pointer;
+}
+.check:checked{
+  background: linear-gradient(to left, hsl(192, 100%, 67%), hsl(280, 87%, 65%)) ;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.check:checked:after{
+  content: '';
+  background-image: url('../img/icon-check.svg');
+  background-size: cover;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+}
