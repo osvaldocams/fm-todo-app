@@ -1,4 +1,4 @@
-import { DraftTodo, Todo } from "../types";
+import { DraftTodo, Filter, Todo } from "../types";
 import { nanoid } from "nanoid"
 
 
@@ -6,15 +6,20 @@ export type TodoActions =
     {type: 'add-todo', payload:{todo: DraftTodo}} |
     {type: 'complete-todo', payload:{completed: Todo['id']}}|
     {type: 'delete-todo', payload:{deleted: Todo['id']}}|
-    {type: 'clear-completed'}
+    {type: 'clear-completed'}|
+    {type: 'toggle-todo', payload:{id: Todo['id']}}|
+    {type: 'set-filter', payload:{filter: Filter}}
+
 
 
 export type TodoState = { 
     todos: Todo[]
+    filter: Filter
 }
 
 export const initialState: TodoState = {
-    todos: []
+    todos: [],
+    filter: 'all'
 }
 
 const createTodo = (draftTodo:DraftTodo):Todo =>{
@@ -59,6 +64,21 @@ export const todoReducer = (
         return {
             ...state,
             todos: state.todos.filter(todo => !todo.completed)
+        }
+    }
+    if(actions.type==='toggle-todo'){
+        return{
+            ...state,
+            todos: state.todos.map(todo => todo.id === actions.payload.id 
+                ? {...todo, completed: !todo.completed}
+                : todo
+            )
+        }
+    }
+    if(actions.type === 'set-filter'){
+        return {
+            ...state,
+            filter: actions.payload.filter
         }
     }
     return state

@@ -3,10 +3,17 @@ import { useTodo } from "../hooks/useTodo"
 
 export default function ListContainer() {
     const {state, dispatch, unCompletedLength} = useTodo()
-    
+
+    const filteredTodos = state.todos.filter(todo => {
+        if(state.filter === 'all') return true
+        if(state.filter === 'active') return !todo.completed
+        if(state.filter === 'completed') return todo.completed
+        return true
+    })
+
     return (
         <div className="w-full bg-white rounded-md text-VeryDarkGrayishBlue md:max-w-[800px]">
-            {state.todos.map(todo =>(
+            {filteredTodos.map(todo =>(
                 <div 
                     className="flex justify-between items-center gap-3 p-5 pb-10 border-b border-gray-200 last-of-type:border-0 last-of-type:pb-0"
                     key={todo.id}
@@ -16,7 +23,7 @@ export default function ListContainer() {
                         className="check"
                         id="completed"
                         checked={todo.completed}
-                        onChange={()=>{dispatch({type: 'complete-todo', payload: {completed: todo.id}})}}
+                        onChange={()=>{dispatch({type: 'toggle-todo', payload: {id: todo.id}})}}
                         
                     />
                     <p className="flex-1">{todo.text}</p>
