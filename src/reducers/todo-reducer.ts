@@ -8,18 +8,21 @@ export type TodoActions =
     {type: 'delete-todo', payload:{deleted: Todo['id']}}|
     {type: 'clear-completed'}|
     {type: 'toggle-todo', payload:{id: Todo['id']}}|
-    {type: 'set-filter', payload:{filter: Filter}}
+    {type: 'set-filter', payload:{filter: Filter}}|
+    {type: 'toggle-dark-mode'}
 
 
 
 export type TodoState = { 
     todos: Todo[]
     filter: Filter
+    DarkMode: boolean
 }
 
 export const initialState: TodoState = {
     todos: [],
-    filter: 'all'
+    filter: 'all',
+    DarkMode: false
 }
 
 const createTodo = (draftTodo:DraftTodo):Todo =>{
@@ -79,6 +82,12 @@ export const todoReducer = (
         return {
             ...state,
             filter: actions.payload.filter
+        }
+    }
+    if(actions.type === 'toggle-dark-mode'){
+        return {
+            ...state,
+            DarkMode: !state.DarkMode
         }
     }
     return state

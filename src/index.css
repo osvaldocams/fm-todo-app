@@ -8,6 +8,43 @@
   letter-spacing: 10px;
 }
 
+.hero{
+  width: 100%;
+  height: 200px;
+  background-image: url('/img/bg-mobile-light.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 20px;
+}
+.hero-dark{
+  width: 100%;
+  height: 200px;
+  background-image: url('/img/bg-mobile-dark.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 20px;
+}
+@media (min-width: 768px){
+  .hero{
+    height: 300px;
+    background-image: url('/img/bg-desktop-light.jpg');
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media (min-width: 768px){
+  .hero-dark{
+    height: 300px;
+    background-image: url('/img/bg-desktop-dark.jpg');
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 .check{
   width:30px;
   height:30px;
@@ -25,7 +62,7 @@
 }
 .check:checked:after{
   content: '';
-  background-image: url('../img/icon-check.svg');
+  background-image: url('/img/icon-check.svg');
   background-size: cover;
   position: absolute;
   width: 15px;

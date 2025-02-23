@@ -5,7 +5,7 @@ import { useTodo } from '../hooks/useTodo'
 
 export default function InputsContainer() {
 
-    const {dispatch} = useTodo()
+    const {state, dispatch} = useTodo()
     
     const [todo, setTodo] = useState<DraftTodo>({
         text: '',
@@ -32,15 +32,15 @@ export default function InputsContainer() {
     }
 
     return (
-        <div className="w-full bg-white p-2 rounded-md mt-10 mb-3 md:max-w-[800px]">
+        <div className={`w-full p-2 rounded-md mt-10 mb-3 md:max-w-[800px] ${state.DarkMode ? 'bg-stone-700': 'bg-white'}`}>
             <form 
-                className="flex justify-between items-center gap-2"
+                className={`flex justify-between items-center gap-2 ${state.DarkMode && 'bg-stone-700'} `}
                 onSubmit={handleSubmit}
             >
                 <input 
                     type="text" 
                     placeholder="Create a new todo..." 
-                    className="w-full p-2 rounded-md"
+                    className={`w-full p-2 rounded-md ${state.DarkMode && 'bg-VeryDarkBg text-white placeholder:text-white'} `}
                     value={todo.text}
                     onChange={handleChange}
                 />
@@ -48,7 +48,7 @@ export default function InputsContainer() {
                     className="p-2 rounded-md cursor-pointer disabled:opacity-10"
                     disabled={todo.text.trim() === ''}
                 >
-                    <PlusCircleIcon className="h-8 w-8 text-black"/>
+                    <PlusCircleIcon className={`h-8 w-8 ${state.DarkMode ? 'text-white': 'text-black'}`}/>
                 </button>
             </form>
         </div>
