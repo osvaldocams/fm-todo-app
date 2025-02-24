@@ -1,3 +1,4 @@
+import { arrayMove } from "@dnd-kit/sortable";
 import { DraftTodo, Filter, Todo } from "../types";
 import { nanoid } from "nanoid"
 
@@ -9,7 +10,8 @@ export type TodoActions =
     {type: 'clear-completed'}|
     {type: 'toggle-todo', payload:{id: Todo['id']}}|
     {type: 'set-filter', payload:{filter: Filter}}|
-    {type: 'toggle-dark-mode'}
+    {type: 'toggle-dark-mode'}|
+    {type: 'reorder', payload:{activeId: Todo['id'], overId: Todo['id']}}
 
 
 
@@ -103,6 +105,18 @@ export const todoReducer = (
         return {
             ...state,
             DarkMode: !state.DarkMode
+        }
+    }
+    if(actions.type === 'reorder'){
+        const {activeId, overId} = actions.payload
+        const activeIndex = state.todos.findIndex(todo => todo.id === activeId)
+        const overIndex = state.todos.findIndex(todo => todo.id === overId)
+        const newTodos = arrayMove(state.todos, activeIndex, overIndex)
+        // const newTodos = [...state.todos]
+        // newTodos.splice(overIndex, 0, newTodos.splice(activeIndex, 1)[0])
+        return {
+            ...state,
+            todos: newTodos
         }
     }
     return state

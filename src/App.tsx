@@ -16,6 +16,7 @@ function App() {
 	}, [state])
 	
     return (
+		<div className={`fixed inset-0 w-screen h-screen z-50 overflow-auto ${state.DarkMode ? 'bg-stone-900': 'bg-[#f5f5f5]'}`}>
 		<div className={`bg-[#f5f5f5] min-h-screen ${state.DarkMode && 'bg-stone-900'}`}>
 			<div 
 				className={`${state.DarkMode ? 'hero-dark' : 'hero'}`}
@@ -35,6 +36,7 @@ function App() {
 				<TodoFilters/>
 				<p className={`mt-20 ${state.DarkMode ? 'text-white': 'text-VeryDarkGrayishBlue'} text-center`}>Drag and drop to reorder list</p>
 			</div>
+		</div>
 		</div>
 	)
 }
