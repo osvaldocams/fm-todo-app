@@ -112,8 +112,6 @@ export const todoReducer = (
         const activeIndex = state.todos.findIndex(todo => todo.id === activeId)
         const overIndex = state.todos.findIndex(todo => todo.id === overId)
         const newTodos = arrayMove(state.todos, activeIndex, overIndex)
-        // const newTodos = [...state.todos]
-        // newTodos.splice(overIndex, 0, newTodos.splice(activeIndex, 1)[0])
         return {
             ...state,
             todos: newTodos

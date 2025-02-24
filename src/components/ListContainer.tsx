@@ -37,25 +37,6 @@ export default function ListContainer() {
                             key={todo.id}
                             todo={todo}
                         />
-                        // <div 
-                        //     className={`${state.DarkMode ? 'bg-stone-700 text-white border-slate-400': ''} flex justify-between items-center gap-3 p-5 pb-10 border-b last-of-type:border-0`}
-                        //     key={todo.id}
-                        // >
-                        //     <input 
-                        //         type="checkbox"
-                        //         className="check"
-                        //         id="completed"
-                        //         checked={todo.completed}
-                        //         onChange={()=>{dispatch({type: 'toggle-todo', payload: {id: todo.id}})}}
-                                
-                        //     />
-                        //     <p className={`flex-1 ${todo.completed && 'line-through'}`}>{todo.text}</p>
-                        //     <img 
-                        //         className="cursor-pointer" 
-                        //         src="/img/icon-cross.svg" alt="delete" 
-                        //         onClick={()=>{dispatch({type: 'delete-todo', payload: {deleted: todo.id}})}}
-                        //     />
-                        // </div>
                     ))}
                 
             </div>
@@ -69,7 +50,7 @@ export default function ListContainer() {
                 <button
                     onClick={()=>{dispatch({type: 'clear-completed'})}}
                 >
-                    clear completeds
+                    clear completes
                 </button>
             </div>
         </>

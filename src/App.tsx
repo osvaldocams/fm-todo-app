@@ -5,7 +5,6 @@ import ListContainer from "./components/ListContainer"
 import TodoFilters from "./components/TodoFilters"
 import { useTodo } from "./hooks/useTodo"
 
-// "bg-slate-100 min-h-screen"
 
 function App() {
 	const {state, dispatch} = useTodo()
