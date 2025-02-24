@@ -1,4 +1,5 @@
 
+import { useEffect } from "react"
 import InputsContainer from "./components/InputsContainer"
 import ListContainer from "./components/ListContainer"
 import TodoFilters from "./components/TodoFilters"
@@ -8,6 +9,12 @@ import { useTodo } from "./hooks/useTodo"
 
 function App() {
 	const {state, dispatch} = useTodo()
+
+	useEffect(()=>{
+		localStorage.setItem('task', JSON.stringify(state.todos))
+		localStorage.setItem('dark-mode', JSON.stringify(state.DarkMode))
+	}, [state])
+	
     return (
 		<div className={`bg-[#f5f5f5] min-h-screen ${state.DarkMode && 'bg-stone-900'}`}>
 			<div 

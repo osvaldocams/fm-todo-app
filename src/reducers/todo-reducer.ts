@@ -19,10 +19,25 @@ export type TodoState = {
     DarkMode: boolean
 }
 
+const localStorageTodos = ():Todo[] => {
+    const todos = localStorage.getItem('task')
+    if(todos){
+        return JSON.parse(todos)
+    }
+    return []
+}
+const localStorageDarkMode = ():boolean => {
+    const darkMode = localStorage.getItem('dark-mode')
+    if(darkMode){
+        return JSON.parse(darkMode)
+    }
+    return false
+}
+
 export const initialState: TodoState = {
-    todos: [],
+    todos: localStorageTodos(),
     filter: 'all',
-    DarkMode: false
+    DarkMode: localStorageDarkMode()
 }
 
 const createTodo = (draftTodo:DraftTodo):Todo =>{
