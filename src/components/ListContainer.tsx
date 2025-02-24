@@ -26,11 +26,12 @@ export default function ListContainer() {
                 collisionDetection={closestCenter}
                 onDragEnd={handleDragEnd}
             >
-            <div className={`w-full bg-white rounded-md text-VeryDarkGrayishBlue md:max-w-[800px] `}>
                 <SortableContext 
                     items={filteredTodos.map(todo => todo.id)}
                     strategy={verticalListSortingStrategy}
                 >
+            <div className={`w-full bg-white rounded-md text-VeryDarkGrayishBlue md:max-w-[800px] `}>
+                
                     {filteredTodos.map(todo =>(
                         <TodoItem
                             key={todo.id}
@@ -56,8 +57,9 @@ export default function ListContainer() {
                         //     />
                         // </div>
                     ))}
-                </SortableContext>
+                
             </div>
+            </SortableContext>
             
             </DndContext>    
             <div 
