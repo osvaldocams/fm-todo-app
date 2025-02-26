@@ -21,7 +21,7 @@ export default function TodoItem({todo}:TodoItemProps) {
             {...listeners}
             ref={setNodeRef}
             style={style}
-            className={`${state.DarkMode ? 'bg-stone-700 text-white border-slate-400': ''} flex justify-between items-center gap-3 p-5 pb-10 border-b last-of-type:border-0`}
+            className={`draggable-item ${state.DarkMode ? 'bg-stone-700 text-white border-slate-400': ''} flex justify-between items-center gap-3 p-5 pb-10 border-b last-of-type:border-0`}
             //key={todo.id}
         >
             <input 
@@ -31,6 +31,7 @@ export default function TodoItem({todo}:TodoItemProps) {
                 checked={todo.completed}
                 onChange={()=>{dispatch({type: 'toggle-todo', payload: {id: todo.id}})}}
                 onPointerDown={(e) => e.stopPropagation()}
+                onTouchStart={(e) => e.stopPropagation()}
             />
             <p className={`flex-1 ${todo.completed && 'line-through'}`}>{todo.text}</p>
             <img 
@@ -38,6 +39,7 @@ export default function TodoItem({todo}:TodoItemProps) {
                 src="/img/icon-cross.svg" alt="delete" 
                 onClick={()=>{dispatch({type: 'delete-todo', payload: {deleted: todo.id}})}}
                 onPointerDown={(e) => e.stopPropagation()}
+                onTouchStart={(e) => e.stopPropagation()}
             />
         </div>
     )

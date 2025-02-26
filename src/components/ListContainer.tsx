@@ -1,8 +1,7 @@
 import { useTodo } from "../hooks/useTodo"
-import { DndContext, DragEndEvent, closestCenter } from "@dnd-kit/core"
+import { DndContext, DragEndEvent, closestCenter, PointerSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core"
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import TodoItem from "./TodoItem"
-
 
 export default function ListContainer() {
     const {state, dispatch, unCompletedLength} = useTodo()
@@ -13,7 +12,11 @@ export default function ListContainer() {
         if(state.filter === 'completed') return todo.completed
         return true
     })
-    const handleDragEnd = (event:DragEndEvent) => {
+    const sensors = useSensors(
+        useSensor(PointerSensor),
+        useSensor(TouchSensor)
+    )
+    const handleDragEnd = (event: DragEndEvent) => {
         const {active, over} = event
         if(over && active.id !== over.id){
             dispatch({type: 'reorder', payload: {activeId: active.id.toString(), overId: over.id.toString()}})
@@ -25,6 +28,7 @@ export default function ListContainer() {
             <DndContext
                 collisionDetection={closestCenter}
                 onDragEnd={handleDragEnd}
+                sensors={sensors}
             >
                 <SortableContext 
                     items={filteredTodos.map(todo => todo.id)}
@@ -45,10 +49,10 @@ export default function ListContainer() {
             </DndContext>    
             <div 
                 className={`mt-5 flex justify-between items-center p-5 rounded-md md:justify-center md:gap-96 ${state.DarkMode ? 'bg-stone-700 text-white': 'bg-white'}`}
-                >
+            >
                 <span>{unCompletedLength} items left</span>
                 <button
-                    onClick={()=>{dispatch({type: 'clear-completed'})}}
+                    onClick={() => {dispatch({type: 'clear-completed'})}}
                 >
                     clear completes
                 </button>
