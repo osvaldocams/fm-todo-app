@@ -68,3 +68,7 @@
   width: 15px;
   height: 15px;
 }
+
+.draggable-item{
+  touch-action: none;
+}
